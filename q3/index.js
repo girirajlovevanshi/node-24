@@ -1,6 +1,5 @@
 
 //Write a Node.js script to create a web server that returns 'Welcome to Node.js DashBoard'.
-Write an example to demonstrate event handling using EventEmitter.
 
 import http from 'http'
 
