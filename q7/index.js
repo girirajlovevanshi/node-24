@@ -13,7 +13,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const server = http.createServer((req, res) => {
-    let filepath = path.join(__dirname, 'public', req.url === '/' ? 'index.html' : req.url)
+    let filepath = path.join(__dirname, 'public', req.url === '/' ? 'index.html' : req.url )
 
     // get file extension
     const extname = path.extname(filepath)
@@ -25,7 +25,7 @@ const server = http.createServer((req, res) => {
             break;
 
         case '.js':
-            contentType = 'text/javascrpit';
+            contentType = 'text/javascript';
             break;
         case '.json':
             contentType = 'application/json';
@@ -39,14 +39,20 @@ const server = http.createServer((req, res) => {
     }
 
     //Read and Serve the file
-    fs.readFile('filepath',(err,data)=>{
+    fs.readFile(filepath,(err,data)=>{
         if(err){
             if(err.code === 'ENOENT'){
-                fs.readFile(path.join(__dirname, 'public','404.html'), (err, data)=>{
-                    res.writeHead(404, {'Content-type': 'text/html'})
-                    res.end(data , 'utf8')
+                fs.readFile(path.join(__dirname, 'public','404.html'), (err404, data404) => {
+                    if (err404) {
+                        res.writeHead(500);
+                        res.end('Error loading 404 page');
+                    } else {
+                        res.writeHead(404, { 'Content-Type': 'text/html' });
+                        res.end(data404, 'utf8');
+                    }
                 })
             }else{
+                // server error
                 res.writeHead(500)
                 res.end(`server Error: ${err.code}`)
             }
