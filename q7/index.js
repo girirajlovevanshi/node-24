@@ -69,5 +69,3 @@ server.listen(port, ()=>{
     console.log(`server is running, PORT: ${port}`);
     
 })
-
-//getting errors - index.html not serving
