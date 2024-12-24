@@ -17,6 +17,10 @@ console.log('Mission Done, supplies recived (appened)');
 const fileSatus = fs.statSync(filePath)
 console.log(fileSatus);
 
+//reading the file 
+const data = fs.readFileSync('example.txt', 'utf8');
+console.log(data); 
+
 // renaming the file
 import path from 'path';
 const fileName = path.basename(filePath)
