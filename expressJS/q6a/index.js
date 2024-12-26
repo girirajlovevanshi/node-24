@@ -11,7 +11,7 @@ app.use(bodyParser.json()); // Using body-parser middleware to parse JSON reques
 const connectDB = async () => { 
     try {
         // Connecting to MongoDB
-        await mongoose.connect("mongodb+srv://girirajlovewanshi:giri123Raj@cluster0.lhsmx.mongodb.net/videotubeDB");
+        await mongoose.connect("mongodb+srv://<username>:<password>@cluster0.lhsmx.mongodb.net/videotubeDB");
         console.log('MongoDB Connected...'); // Log success message
     } catch (err) {
         console.error(err.message); // Log error message
