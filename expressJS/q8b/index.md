@@ -1,4 +1,3 @@
-```markdown
 # Using Promises with Express.js Routes
 
 Promises are used in Express.js routes to handle asynchronous operations, such as database queries or API calls, and to manage the flow of data between different parts of the application. Here's an example of how you can use Promises with Express.js routes:
@@ -29,4 +28,3 @@ app.listen(3000, () => { // Start the Express.js server
 In this example, the `/users` route uses the `then` method to handle the resolved Promise returned by the `User.find()` method, which retrieves all users from the database. If the Promise is resolved successfully, the route sends the users data as a JSON response. If the Promise is rejected or an error occurs, the `catch` method is used to handle the error and send a 500 status code for server error.
 
 To use Promises in Express.js routes, you can chain multiple asynchronous operations together using the `then` method, and handle any errors using the `catch` method. Promises help to simplify the handling of asynchronous code and improve the readability of the code.
-```
