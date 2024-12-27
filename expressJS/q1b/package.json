@@ -1,6 +1,5 @@
 {
-  
-  "name": "q1b",
+  "name": "q2b",
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",
@@ -14,7 +13,6 @@
   "dependencies": {
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
-    "mongoose": "^8.9.2"
-  },
-  "devDependencies": {}
+    "jsonwebtoken": "^9.0.2"
+  }
 }

@@ -1,28 +1,44 @@
-// q2b at q1b 
-// Write an API in Express.js to handle user login and return a JWT token.
+//Write an API to register a new user with Express and store data in a MongoDB database.
 
-import express from 'express'
-import jwt from 'jsonwebtoken'
-import dotenv from 'dotenv'
+import express from 'express';
+import connectDB from './db.js';
+import User from './models/User.js';
+import dotenv from 'dotenv';
 
 dotenv.config({
     path: './.env'
-})
+});
 
-const app = express() 
+connectDB();
 
-app.use(express.json())
+const app = express();
 
-app.post('/login', (req, res) => {
-    const { username, password } = req.body
-    if(username === 'user' && password === 'password') {
-        const token = jwt.sign({ username: username }, process.env.JWT_SECRET)
-        res.json({ token })
-    } else {
-        res.status(401).json({ message: 'Invalid username or password' })
+app.use(express.json());
+
+app.post('/register', async (req, res) => {
+    const { name, email, password } = req.body;
+
+    try {
+        let user = await User.findOne({ email });
+
+        if (user) {
+            return res.status(400).json({ msg: 'User already exists' });
+        }
+
+        user = new User({
+            name,
+            email,
+            password
+        });
+
+        await user.save();
+
+        res.json({ msg: 'User registered successfully' });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server Error');
     }
-})
-
-app.listen(3000, () => {    
-    console.log('Server is running on port 3000')
-})
+});
+        
+app.listen(process.env.PORT, () => console.log('Server running on port 3000'));
